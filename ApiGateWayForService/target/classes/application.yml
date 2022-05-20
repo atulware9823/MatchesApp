@@ -1,0 +1,28 @@
+server:
+    port: 8088
+eureka:
+   client:
+      service-url:
+       defaultZone: http://localhost:8761/eureka/
+
+spring:
+ application:
+  name: ApiGateWayForService
+ cloud:
+    gateway:
+      routes:
+      - id: MatchesAppService
+        uri: http://localhost:8082/
+        predicates:
+        - Path=/api/**
+      - id: MatchesAppUserService
+        uri: http://localhost:8083/
+        predicates:
+        - Path=/api/**
+      - id: Matches_App_JWT_Service
+        uri: http://localhost:8081/
+        predicates:
+        - Path=/api/jwt/**
+          
+      
+  
